@@ -1,31 +1,31 @@
 // ProductListPage.js
-import React, { useState, useEffect } from 'react';
-import { Table, Button, Row, Col, Modal } from 'antd';
+import React, { useState, useEffect, useContext } from 'react';
+import { Button, Row, Col, Modal, Empty } from 'antd';
 import { Link } from 'react-router-dom'; // Assuming using React Router for navigation
 
 
 import ProductFilter from '../ProductFilter';
 import ProductTable from '../ProductTable';
+import { ProductContext } from '../ProductContext';
 
 import './index.css'
 import sampleProducts from '../sampleProducts';
 
 const ProductListPage = () => {
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
+    // const [categories, setCategories] = useState([]);
     const [showFiltersModal, setShowFiltersModal] = useState(false);
+    const { products, categories, addProduct } = useContext(ProductContext);
   
-    useEffect(() => {
-        setProducts(sampleProducts)
-        const uniqueCategories = [...new Set(sampleProducts.map(product => product.category))];
-        setCategories(uniqueCategories);
-      }, []);
-    
+
+
       const applyFilters = (filteredProducts) => {
         setFilteredProducts(filteredProducts);
         setShowFiltersModal(false); // Close modal after applying filters
       };
+    
+
 
   return (
     <div>
@@ -53,7 +53,11 @@ const ProductListPage = () => {
                 <Button type="primary" style={{ marginBottom: '10px' }}><Link to="/add-product">Add Product</Link></Button>
             </div>
             
-            <ProductTable products={filteredProducts.length > 0 ? filteredProducts : products} />
+            {filteredProducts.length > 0 ? (
+                            <ProductTable products={filteredProducts} />
+                        ) : (
+                            <Empty description="No products available" />
+                        )}
           </div>
         </Col>
       </Row>

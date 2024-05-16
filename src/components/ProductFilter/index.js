@@ -13,27 +13,31 @@ const ProductFilter = ({ products, setFilteredProducts, categories }) => {
 
   // Implement filtering logic
   const applyFilter = () => {
-    const filteredProducts = products.filter(product => {
-        let match = true;
-        if (nameFilter && !product.name.toLowerCase().includes(nameFilter.toLowerCase())) {
-          match = false;
-        }
-        if (descriptionFilter && !product.description.toLowerCase().includes(descriptionFilter.toLowerCase())) {
-          match = false;
-        }
-        if (categoryFilter && product.category !== categoryFilter) {
-          match = false;
-        }
-        return match;
-      });
+    let filteredProducts = [...products];
+    if (categoryFilter !== 'All') {
+      filteredProducts = filteredProducts.filter(product => product.category === categoryFilter);
+    }else if (categoryFilter === "All"){
+        filteredProducts = [...products]
+    }
+    if (nameFilter) {
+      filteredProducts = filteredProducts.filter(product => product.name.toLowerCase().includes(nameFilter.toLowerCase()));
+    }
+    if (descriptionFilter) {
+      filteredProducts = filteredProducts.filter(product => product.description.toLowerCase().includes(descriptionFilter.toLowerCase()));
+    }
     setFilteredProducts(filteredProducts);
   }
+
 
   return (
     <div className='product-filter-container'>
       <Input className='input-box' placeholder="Search by Name" value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} />
       <Input className='input-box' placeholder="Search by Description" value={descriptionFilter} onChange={(e) => setDescriptionFilter(e.target.value)} />
-      <Select placeholder="Filter by Category" value={categoryFilter} onChange={(value) => setCategoryFilter(value)}>
+      <Select className='category-selection-box' placeholder="Filter by Category" value={categoryFilter ? categoryFilter : "All"} onChange={(value) => setCategoryFilter(value)}>
+        
+        <Option key="All" value="All">
+          All
+        </Option>
         {categories.map((category) => (
           <Option key={category} value={category}>
             {category}

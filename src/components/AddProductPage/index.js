@@ -1,27 +1,27 @@
 // AddProductPage.js
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Input, Select, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import sampleProducts from '../sampleProducts';
+import { ProductContext } from '../ProductContext';
 
 const { Option } = Select;
 
 const AddProductPage = () => {
+const { addProduct } = useContext(ProductContext);
   const navigate = useNavigate();
   const [form] = Form.useForm();
   
   const handleSubmit = (values) => {
-    const newProduct = {
-      id: sampleProducts.length + 1,
-      ...values,
-    };
-    sampleProducts.push(newProduct);
+    
+    // sampleProducts.push(newProduct);
+    addProduct(values)
     message.success('Product added successfully');
-    navigate('/product-list');
+    navigate('/');
   };
 
   const handleCancel = () => {
-    navigate('/product-list');
+    navigate('/');
   };
 
   return (
