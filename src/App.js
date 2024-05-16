@@ -10,11 +10,11 @@ function App() {
   return (
     <div className="App">
         <ProductProvider>
-        <Routes> {/* Use Switch to only render the first matched route */}
-          <Route exact path="/" element={<ProductListPage />} /> {/* Render ProductListPage at the root route */}
-          
-          <Route exact path="/add-product" element={<AddProductPage />} /> {/* Render AddProductPage */}
-        </Routes>
+          <Routes> {/* Use Switch to only render the first matched route */}
+            <Route exact path="/" element={<ProductListPage />} /> {/* Render ProductListPage at the root route */}
+            
+            <Route exact path="/add-product" element={<AddProductPage />} /> {/* Render AddProductPage */}
+          </Routes>
         </ProductProvider>
     </div>
   );

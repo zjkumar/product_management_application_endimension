@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 import sampleProducts from '../sampleProducts';
 
+import { v4 as uuidv4 } from 'uuid';
 
 export const ProductContext = createContext();
 
@@ -18,11 +19,14 @@ export const ProductProvider = ({ children }) => {
   }, []);
 
   const addProduct = (newProduct) => {
-    setProducts(prevProducts => [...prevProducts, newProduct]);
+    const updatedNewProduct = {id: uuidv4(), ...newProduct}
+    setProducts(prevProducts => [...prevProducts, updatedNewProduct]);
+
+    console.log(updatedNewProduct)
   };
 
   return (
-    <ProductContext.Provider value={{ products, categories, addProduct }}>
+    <ProductContext.Provider value={{ products, categories, addProduct, setProducts, setCategories }}>
       {children}
     </ProductContext.Provider>
   );

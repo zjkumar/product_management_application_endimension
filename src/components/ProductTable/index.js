@@ -2,7 +2,7 @@
 import React from 'react';
 import { Table, Button } from 'antd';
 
-const ProductTable = ({ products }) => {
+const ProductTable = ({ products, onEdit, onDelete }) => {
   const columns = [
     {
       title: 'Category',
@@ -29,8 +29,8 @@ const ProductTable = ({ products }) => {
       key: 'actions',
       render: (text, record) => (
         <span>
-          <Button>Edit</Button>
-          <Button>Delete</Button>
+          <Button onClick={() => onEdit(record)}>Edit</Button>
+          <Button onClick={() => onDelete(record)}>Delete</Button>
         </span>
       ),
     },
