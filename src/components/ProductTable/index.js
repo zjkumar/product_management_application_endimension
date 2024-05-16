@@ -1,13 +1,23 @@
 // ProductTable.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { Table, Button } from 'antd';
-
+import { ProductContext } from '../ProductContext';
 const ProductTable = ({ products, onEdit, onDelete }) => {
+  const { categoryColors } = useContext(ProductContext);
+
   const columns = [
     {
       title: 'Category',
       dataIndex: 'category',
       key: 'category',
+      render: (text, record) => {
+        return {
+          children: text,
+          props: {
+            style: { backgroundColor: categoryColors[text] || 'inherit' },
+          },
+        };
+      },
     },
     {
       title: 'Name',
@@ -36,7 +46,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
     },
   ];
 
-  return <Table dataSource={products} columns={columns} />;
+  return <Table dataSource={products} columns={columns} bordered />;
 };
 
 export default ProductTable;
