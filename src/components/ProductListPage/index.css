@@ -1,0 +1,33 @@
+/* .product-list-layout{
+    padding: 20px;
+} */
+
+@media (min-width: 768px){
+    /* .product-list-layout{
+        display: flex;
+    } */
+    
+    /* .product-filter-container{
+        width: 30%;
+        padding: 15px;
+    } */
+
+    /* .product-list-content{
+        width: 70%;
+        border-left: solid 1px black;
+        padding: 15px;
+    } */
+}
+
+.btn-holder{
+    margin-bottom: 15px;
+}
+
+.statistics-container {
+    align-self: flex-start;
+}
+
+.statistics{
+    margin-left: 10px;
+    margin-right: 10px;
+}
