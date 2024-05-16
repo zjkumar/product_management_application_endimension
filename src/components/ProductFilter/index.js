@@ -1,6 +1,6 @@
 // ProductFilter.js
 import React, { useState } from 'react';
-import { Input, Select } from 'antd';
+import { Input, Select, Button } from 'antd';
 
 import './index.css'
 
@@ -12,6 +12,22 @@ const ProductFilter = ({ products, setFilteredProducts, categories }) => {
   const [categoryFilter, setCategoryFilter] = useState('');
 
   // Implement filtering logic
+  const applyFilter = () => {
+    const filteredProducts = products.filter(product => {
+        let match = true;
+        if (nameFilter && !product.name.toLowerCase().includes(nameFilter.toLowerCase())) {
+          match = false;
+        }
+        if (descriptionFilter && !product.description.toLowerCase().includes(descriptionFilter.toLowerCase())) {
+          match = false;
+        }
+        if (categoryFilter && product.category !== categoryFilter) {
+          match = false;
+        }
+        return match;
+      });
+    setFilteredProducts(filteredProducts);
+  }
 
   return (
     <div className='product-filter-container'>
@@ -24,6 +40,7 @@ const ProductFilter = ({ products, setFilteredProducts, categories }) => {
           </Option>
         ))}
       </Select>
+      <Button type="primary" onClick={applyFilter}>Show Results</Button>
     </div>
   );
 };
