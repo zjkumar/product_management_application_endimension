@@ -1,13 +1,13 @@
-// ProductListPage.js
+
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, Row, Col, Modal, Empty, Form, Input, Select, message } from 'antd';
-import { Link } from 'react-router-dom'; // Assuming using React Router for navigation
+import { Link } from 'react-router-dom'; 
 
 
 import ProductFilter from '../ProductFilter';
 import ProductTable from '../ProductTable';
 import { ProductContext } from '../ProductContext';
-import sampleProducts from '../sampleProducts';
+// import sampleProducts from '../sampleProducts';
 
 
 import './index.css'
@@ -26,12 +26,6 @@ const ProductListPage = () => {
     const [productToDelete, setProductToDelete] = useState(null);
     const [productToEdit, setProductToEdit] = useState(null);
     const [form] = Form.useForm();
-
-
-    //   const applyFilters = (filteredProducts) => {
-    //     setFilteredProducts(filteredProducts);
-    //     setShowFiltersModal(false); // Close modal after applying filters
-    //   };
     
 
     useEffect(() => {
@@ -73,13 +67,10 @@ const ProductListPage = () => {
 
         setCategories(updatedCategories);
 
-            
         
         setFilteredProducts(updatedProducts);
-        // Remove the product from the sample products data
-        const updatedSampleProducts = sampleProducts.filter(p => p !== productToDelete);
-        // You may want to update the context or make an API call to delete the product permanently
         
+        // Hide the delete modal
         setDeleteModalVisible(false);
     };
 
@@ -108,12 +99,16 @@ const ProductListPage = () => {
                     }
                     return product;
                 });
+
                 // Update sampleProducts with the updated product
                 setProducts(updatedProducts);
+
                 // Close the modal
                 setEditModalVisible(false);
+
                 // Show success message
                 message.success('Product updated successfully');
+
                 // Update the filtered products
                 setFilteredProducts(updatedProducts);
             })
@@ -123,7 +118,6 @@ const ProductListPage = () => {
     };
 
     const cancelEdit = () => {
-        
         setEditModalVisible(false);
     };
 

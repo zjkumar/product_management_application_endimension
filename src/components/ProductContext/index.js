@@ -10,7 +10,7 @@ export const ProductProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Fetch products data from an API or set it from sample data
+    // set products data from sample data
     setProducts(sampleProducts);
 
     // Extract unique categories from products and set them

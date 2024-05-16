@@ -1,8 +1,8 @@
-// AddProductPage.js
+
 import React, { useState, useContext } from 'react';
 import { Form, Input, Select, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import sampleProducts from '../sampleProducts';
+// import sampleProducts from '../sampleProducts';
 import { ProductContext } from '../ProductContext';
 
 const { Option } = Select;
